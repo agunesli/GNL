@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-int	ft_is_line(char	*buf)
+int	ft_nl(char	*buf)
 {
 	int	len;
 
@@ -17,13 +17,14 @@ char	*get_next_line(int fd)
 	char		*buf;
 	char		*tmp;
 	char		*sub;
+	size_t		len;
 	int			nb;
 
 	buf = malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
 	nb = read(fd, buf, BUFFER_SIZE);
-	len = ft_is_line(buf);
+	len = ft_nl(buf);
 	if (nb == BUFFER_SIZE)
 	{
 		if (len < BUFFER_SIZE)
@@ -40,7 +41,7 @@ char	*get_next_line(int fd)
 			tmp = buffer;
 			buffer = ft_strjoin(buffer, buf);
 			free(tmp);
-			return (get_next_line(fg));
+			return (get_next_line(fd));
 		}
 		else
 			return (NULL);
