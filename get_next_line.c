@@ -5,11 +5,16 @@ int	ft_nl(char	*buf)
 	int	len;
 
 	len = 0;
-	while (buf[len] && buf[len]!= '\n')
+	if (buf == NULL)
+		return (0);
+	while (buf[len])
+	{
+		if (buf[len] == '\n')
+			return (len + 1);
 		len++;
-	return (len);
+	}
+	return (0);
 }
-
 
 char	*get_next_line(int fd)
 {
@@ -20,6 +25,19 @@ char	*get_next_line(int fd)
 	size_t		len;
 	int			nb;
 
+//	printf("%s\n",buffer);
+	if (fd == -1)
+		return (NULL);
+	len = ft_nl(buffer);
+//	printf("%lu\n", len);
+	if (len)
+	{
+		tmp = buffer;
+		buffer = ft_substr(buf, len, BUFFER_SIZE);
+		sub = ft_substr(tmp, 0, len);
+		free(tmp);
+		return (sub);
+	}
 	buf = malloc(sizeof(char *) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
