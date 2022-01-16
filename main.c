@@ -6,22 +6,20 @@
 #include <fcntl.h>
 
 
-int main(int ac, char **ag)
+int main()
 {
-	(void)ac;
-	(void)ag;
 	int fd = open("text.txt", O_RDONLY);
-	char *line;
-//	size_t	i = 0;
-	line = get_next_line(fd);
+	size_t i = 0;
+	char *line = get_next_line(fd);
 	while (line != NULL)
 	{
-		write(1, line, ft_strlen(line));
-	//	printf("%s",line);
+		printf("%s",line);
 		free(line);
 		line = get_next_line(fd);
-		write(1, line, ft_strlen(line));
-	
+		i++;
 	}
+	free(line);
+	close(fd);
+	printf("nb de ligne %lu\n", i);
 	return 0;
 }

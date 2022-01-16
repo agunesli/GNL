@@ -25,15 +25,13 @@ char	*get_next_line(int fd)
 	size_t		len;
 	int			nb;
 
-//	printf("%s\n",buffer);
 	if (fd == -1)
 		return (NULL);
 	len = ft_nl(buffer);
-//	printf("%lu\n", len);
 	if (len)
 	{
 		tmp = buffer;
-		buffer = ft_substr(buf, len, BUFFER_SIZE);
+		buffer = ft_substr(tmp, len, BUFFER_SIZE);
 		sub = ft_substr(tmp, 0, len);
 		free(tmp);
 		return (sub);
@@ -45,30 +43,34 @@ char	*get_next_line(int fd)
 	len = ft_nl(buf);
 	if (nb == BUFFER_SIZE)
 	{
-		if (len < BUFFER_SIZE)
+		if (0 < len && len < BUFFER_SIZE + 1)
 		{
 			tmp = ft_substr(buf, 0, len);
 			sub = ft_strjoin(buffer, tmp);
 			free(tmp);
 			free(buffer);
 			buffer = ft_substr(buf, len, BUFFER_SIZE);
+			free(buf);
 			return (sub);
 		}
-		else if (len == BUFFER_SIZE)
+		else if (!len)
 		{
 			tmp = buffer;
-			buffer = ft_strjoin(buffer, buf);
+				buffer = ft_strjoin(tmp, buf);
 			free(tmp);
+			free(buf);
 			return (get_next_line(fd));
 		}
 		else
 			return (NULL);
 	}
-	else if (nb < BUFFER_SIZE)
+	else if (0 < nb && nb < BUFFER_SIZE)
 	{
 		tmp = ft_substr(buf, 0, len);
 		sub = ft_strjoin(buffer, tmp);
 		free(tmp);
+		free(buffer);
+		free(buf);
 		return (sub);
 	}
 	else 
