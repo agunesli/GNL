@@ -18,7 +18,7 @@ int	ft_nl(char	*buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer = NULL;
 	char		*buf;
 	char		*tmp;
 	char		*sub;
@@ -30,9 +30,9 @@ char	*get_next_line(int fd)
 	len = ft_nl(buffer);
 	if (len)
 	{
+		sub = ft_substr(buffer, 0, len);
 		tmp = buffer;
 		buffer = ft_substr(tmp, len, BUFFER_SIZE);
-		sub = ft_substr(tmp, 0, len);
 		free(tmp);
 		return (sub);
 	}
@@ -40,8 +40,24 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	nb = read(fd, buf, BUFFER_SIZE);
-	len = ft_nl(buf);
-	if (nb == BUFFER_SIZE)
+	buf[nb] = '\0';
+	if (0 < nb && nb <= BUFFER_SIZE)
+	{
+		tmp = buffer;
+		buffer = ft_strjoin(tmp, buf);
+		free(tmp);
+		free(buf);
+		return (get_next_line(fd));
+	}
+	else if (!nb && buffer != NULL)
+	{
+		free(buf);
+		tmp = buffer;
+		buffer = NULL;
+		return (tmp);
+	}
+//	len = ft_nl(buf);
+/*	if (nb == BUFFER_SIZE)
 	{
 		if (0 < len && len < BUFFER_SIZE + 1)
 		{
@@ -56,7 +72,7 @@ char	*get_next_line(int fd)
 		else if (!len)
 		{
 			tmp = buffer;
-				buffer = ft_strjoin(tmp, buf);
+			buffer = ft_strjoin(tmp, buf);
 			free(tmp);
 			free(buf);
 			return (get_next_line(fd));
@@ -66,13 +82,18 @@ char	*get_next_line(int fd)
 	}
 	else if (0 < nb && nb < BUFFER_SIZE)
 	{
+		if (!len)
+			len = nb;
 		tmp = ft_substr(buf, 0, len);
 		sub = ft_strjoin(buffer, tmp);
 		free(tmp);
 		free(buffer);
 		free(buf);
 		return (sub);
+	}*/
+	else
+	{
+		free(buf);
+		return (buffer);
 	}
-	else 
-		return (NULL);
 }

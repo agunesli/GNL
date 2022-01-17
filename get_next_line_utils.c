@@ -12,24 +12,24 @@ size_t  ft_strlen(const char *s)
 	return (cpt);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t end)
 {
 	char	*dst;
 	size_t  i;
-	size_t	size;
+//	size_t	size;
 
 	if (!s)
 		return (NULL);
-	size = ft_strlen(s);
+/*	size = ft_strlen(s);
 	if (start >= size)
 		return (ft_strdup(""));
 	if (size < len)
-		len = size;
-	dst = (char *)malloc(sizeof(char) * (len + 1));
+		len = size;*/
+	dst = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (s[i + start] && i < len)
+	while (s[i + start] && i + start < end)
 	{
 		dst[i] = s[start + i];
 		i++;
