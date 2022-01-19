@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 17:09:22 by agunesli          #+#    #+#             */
-/*   Updated: 2022/01/19 17:15:32 by agunesli         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
 size_t  ft_strlen(const char *s)
@@ -28,12 +16,18 @@ char	*ft_substr(char const *s, unsigned int start, size_t end)
 {
 	char	*dst;
 	size_t  i;
+//	size_t	size;
 
 	if (!s)
-		return (0);
+		return (NULL);
+/*	size = ft_strlen(s);
+	if (start >= size)
+		return (ft_strdup(""));
+	if (size < len)
+		len = size;*/
 	dst = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!dst)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (s[i + start] && i + start < end)
 	{
@@ -54,7 +48,7 @@ char	*ft_strdup(const char *src)
 		return (0);
 	dest = (char *)malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (!dest)
-		return (0);
+		return (NULL);
 	while (src[i])
 	{
 		dest[i] = src[i];
@@ -76,7 +70,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s1));
 	dst = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dst)
-		return (0);
+		return (NULL);
 	i = -1;
 	while (s1[++i])
 		dst[i] = s1[i];

@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:27:19 by agunesli          #+#    #+#             */
-/*   Updated: 2022/01/19 16:17:18 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:15:29 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_nl(char	*buf)
 	int	len;
 
 	len = 0;
-	if (buf == NULL)
+	if (buf == 0)
 		return (0);
 	while (buf[len])
 	{
@@ -32,6 +32,8 @@ char	*ft_buffer_add(char *buffer, char *buf)
 {
 	char	*tmp;
 
+	if (buf == NULL)
+		return (0);
 	tmp = buffer;
 	buffer = ft_strjoin(tmp, buf);
 	free(tmp);
@@ -50,7 +52,7 @@ char	*ft_buffer_rm(char *buffer, int len)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
+	static char	*buffer = 0;
 	char		buf[BUFFER_SIZE + 1];
 	char		*tmp;
 	int			len;
