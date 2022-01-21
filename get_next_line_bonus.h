@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:47:00 by agunesli          #+#    #+#             */
-/*   Updated: 2022/01/19 16:28:32 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:26:03 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 # include <stdio.h>
 
 // Partie obligatoire
-char    *get_next_line(int fd);
-char    *ft_substr(char const *s, unsigned int start, size_t len);
-char    *ft_strjoin(char const *s1, char const *s2);
-size_t  ft_strlen(const char *s);
-char    *ft_strdup(const char *src);
-
+char	*get_next_line(int fd);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *src);
 #endif
