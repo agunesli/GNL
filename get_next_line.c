@@ -6,7 +6,7 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:27:19 by agunesli          #+#    #+#             */
-/*   Updated: 2022/01/21 10:28:52 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:00:35 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	*ft_buffer_add(char *buffer, char *buf)
 {
 	char	*tmp;
 
-	if (buf == NULL)
-		return (NULL);
 	tmp = buffer;
 	buffer = ft_strjoin(tmp, buf);
 	free(tmp);
@@ -52,7 +50,7 @@ char	*ft_buffer_rm(char *buffer, int len)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = 0;
+	static char	*buffer;
 	char		buf[BUFFER_SIZE + 1];
 	char		*tmp;
 	int			len;

@@ -8,7 +8,7 @@
 
 int main()
 {
-	int fd = open("text.txt", O_RDONLY);
+	int fd = open("text6.txt", O_RDONLY);
 	size_t i = 0;
 	char *line = get_next_line(fd);
 	while (line != NULL)

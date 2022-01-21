@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 10:27:19 by agunesli          #+#    #+#             */
+/*   Updated: 2022/01/21 14:18:23 by agunesli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
@@ -39,11 +50,11 @@ char	*ft_buffer_rm(char *buffer, int len)
 
 char	*get_next_line(int fd)
 {
-	static char	*(buffer[1024]);
-	char		buf[BUFFER_SIZE + 1];
-	char		*tmp;
-	int			len;
-	int			nb;
+	static	char	*(buffer[1024]);
+	char			buf[BUFFER_SIZE + 1];
+	char			*tmp;
+	int				len;
+	int				nb;
 
 	if ((fd < 0 && fd < 1024) || BUFFER_SIZE < 1)
 		return (NULL);
