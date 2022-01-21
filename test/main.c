@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "../get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -8,7 +8,7 @@
 
 int main()
 {
-	int fd = open("text6.txt", O_RDONLY);
+	int fd = open("text.txt", O_RDONLY);
 	size_t i = 0;
 	char *line = get_next_line(fd);
 	while (line != NULL)
