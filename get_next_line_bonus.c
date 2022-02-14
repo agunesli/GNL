@@ -6,11 +6,11 @@
 /*   By: agunesli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 10:27:19 by agunesli          #+#    #+#             */
-/*   Updated: 2022/01/21 14:18:23 by agunesli         ###   ########.fr       */
+/*   Updated: 2022/02/14 21:13:21 by agunesli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_nl(char	*buf)
 {
@@ -53,21 +53,21 @@ char	*get_next_line(int fd)
 	static	char	*(buffer[1024]);
 	char			buf[BUFFER_SIZE + 1];
 	char			*tmp;
-	int				len;
-	int				nb;
+	int				len_nb[2];
 
-	if ((fd < 0 && fd < 1024) || BUFFER_SIZE < 1)
+	if (fd < 0 || 1023 < fd || BUFFER_SIZE < 1)
 		return (NULL);
-	len = ft_nl(buffer[fd]);
-	if (len)
+	len_nb[0] = ft_nl(buffer[fd]);
+	if (len_nb[0])
 	{
-		tmp = ft_substr(buffer[fd], 0, len);
-		buffer[fd] = ft_buffer_rm(buffer[fd], len);
+		tmp = ft_substr(buffer[fd], 0, len_nb[0]);
+		buffer[fd] = ft_buffer_rm(buffer[fd], len_nb[0]);
 		return (tmp);
 	}
-	nb = read(fd, buf, BUFFER_SIZE);
-	buf[nb] = '\0';
-	if (0 < nb && nb <= BUFFER_SIZE)
+	len_nb[1] = read(fd, buf, BUFFER_SIZE);
+	if (len_nb[1] > 0)
+		buf[len_nb[1]] = '\0';
+	if (0 < len_nb[1] && len_nb[1] <= BUFFER_SIZE)
 	{
 		buffer[fd] = ft_buffer_add(buffer[fd], buf);
 		return (get_next_line(fd));
