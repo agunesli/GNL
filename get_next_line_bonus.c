@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-int	ft_nl(char	*buf)
+int	ft_found_nl(char	*buf)
 {
 	int	len;
 
@@ -48,8 +48,18 @@ char	*ft_buffer_rm(char *buffer, int len)
 	return (buffer);
 }
 
+char	*ft_buffer_end(char *buffer)
+{
+	char	*tmp;
+
+	tmp = buffer;
+	buffer = NULL;
+	return (tmp);
+}
+
 char	*get_next_line(int fd)
 {
+<<<<<<< HEAD
 	static	char	*(buffer[1024]);
 	char			buf[BUFFER_SIZE + 1];
 	char			*tmp;
@@ -59,20 +69,37 @@ char	*get_next_line(int fd)
 		return (NULL);
 	len_nb[0] = ft_nl(buffer[fd]);
 	if (len_nb[0])
+=======
+	static char	*buffer[1024];
+	char		buf[BUFFER_SIZE + 1];
+	char		*tmp;
+	int			len;
+	int			nb;
+
+	if ((fd < 0 || 1024 < fd) || BUFFER_SIZE < 1)
+		return (NULL);
+	len = ft_found_nl(buffer[fd]);
+	if (len)
+>>>>>>> cc64ff92ee066a218c0fcecbfcb842c581beab9a
 	{
 		tmp = ft_substr(buffer[fd], 0, len_nb[0]);
 		buffer[fd] = ft_buffer_rm(buffer[fd], len_nb[0]);
 		return (tmp);
 	}
+<<<<<<< HEAD
 	len_nb[1] = read(fd, buf, BUFFER_SIZE);
 	if (len_nb[1] > 0)
 		buf[len_nb[1]] = '\0';
 	if (0 < len_nb[1] && len_nb[1] <= BUFFER_SIZE)
+=======
+	nb = read(fd, buf, BUFFER_SIZE);
+	if (nb > -1)
+		buf[nb] = '\0';
+	if (0 < nb && nb <= BUFFER_SIZE)
+>>>>>>> cc64ff92ee066a218c0fcecbfcb842c581beab9a
 	{
 		buffer[fd] = ft_buffer_add(buffer[fd], buf);
 		return (get_next_line(fd));
 	}
-	tmp = buffer[fd];
-	buffer[fd] = NULL;
-	return (tmp);
+	return (ft_buffer_end(buffer[fd]));
 }
